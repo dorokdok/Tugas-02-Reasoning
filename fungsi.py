@@ -5,7 +5,7 @@ from typing import List
 listFloat = List[float]
 Fuzifikasi = List[listFloat]
 
-
+#Function Fuzifikasi Servis
 def FuzifikasiServis (inputan: float) -> listFloat :
     bagus = float
     tengah = float
@@ -35,6 +35,7 @@ def FuzifikasiServis (inputan: float) -> listFloat :
         jelek = (inputan - 10)/(40-10)
     return [bagus,tengah,jelek]
 
+#Function Fuzifikasi Harga
 def FuzifikasiHarga (inputan: float) -> listFloat :
     mahal = float
     tengah = float
@@ -64,8 +65,8 @@ def FuzifikasiHarga (inputan: float) -> listFloat :
         murah = (inputan - 2)/(4-2)
     return [mahal,tengah,murah]
 
-
-def inteference(servis: Fuzifikasi, harga: Fuzifikasi) -> Fuzifikasi:
+#Inference dengan aturan
+def inference(servis: Fuzifikasi, harga: Fuzifikasi) -> Fuzifikasi:
     out = Fuzifikasi
     out = []
     pasti = listFloat
@@ -80,7 +81,7 @@ def inteference(servis: Fuzifikasi, harga: Fuzifikasi) -> Fuzifikasi:
         tidak = []
         for j in range(len(servis[i])):
             if servis[i][j] >= 0.5:
-                if j :
+                if j == 0 :
                     if harga[i][0] >= 0.5:
                         if servis[i][j] < harga[i][0]:
                             mungkin.append(servis[i][j])
@@ -88,9 +89,9 @@ def inteference(servis: Fuzifikasi, harga: Fuzifikasi) -> Fuzifikasi:
                             mungkin.append(harga[i][0])
                     if harga[i][1] >= 0.5:
                         if servis[i][j] < harga[i][1]:
-                            pasti.append(servis[i][j])
+                            mungkin.append(servis[i][j])
                         else:
-                            pasti.append(harga[i][1])
+                            mungkin.append(harga[i][1])
                     if harga[i][2] >= 0.5:
                         if servis[i][j] < harga[i][2]:
                             pasti.append(servis[i][j])
@@ -98,17 +99,17 @@ def inteference(servis: Fuzifikasi, harga: Fuzifikasi) -> Fuzifikasi:
                             pasti.append(harga[i][2])
                 if j == 1:
                     if harga[i][0] >= 0.5:
-                        if servis[i][j] < harga[i][0]:
+                        if servis[i][j] <= harga[i][0]:
                             tidak.append(servis[i][j])
                         else:
                             tidak.append(harga[i][0])
                     if harga[i][1] >= 0.5:
-                        if servis[i][j] < harga[i][1]:
+                        if servis[i][j] <= harga[i][1]:
                             mungkin.append(servis[i][j])
                         else:
                             mungkin.append(harga[i][1])
                     if harga[i][2] >= 0.5:
-                        if servis[i][j] < harga[i][2]:
+                        if servis[i][j] <= harga[i][2]:
                             mungkin.append(servis[i][j])
                         else:
                             mungkin.append(harga[i][2])
@@ -125,9 +126,9 @@ def inteference(servis: Fuzifikasi, harga: Fuzifikasi) -> Fuzifikasi:
                             tidak.append(harga[i][1])
                     if harga[i][2] >= 0.5:
                         if servis[i][j] < harga[i][2]:
-                            mungkin.append(servis[i][j])
+                            tidak.append(servis[i][j])
                         else:
-                            mungkin.append(harga[i][2])
+                            tidak.append(harga[i][2])
         pasti.sort()
         mungkin.sort()
         tidak.sort()
@@ -146,3 +147,11 @@ def inteference(servis: Fuzifikasi, harga: Fuzifikasi) -> Fuzifikasi:
         out.append(dmp)
 
     return out
+
+#Defuzzifikasi
+def defuzzy(inputan: listFloat) -> float:
+    pembagi = inputan[0]+inputan[1]+inputan[2]
+    if pembagi == 0:
+        return 0
+    else:
+        return ((inputan[0]*100+inputan[1]*50+inputan[2]*30)/pembagi)
