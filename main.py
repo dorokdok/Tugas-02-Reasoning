@@ -34,12 +34,22 @@ for i in range(len(inferenceds)):
     defuzzy.append(dmp)
 
 #Mengubah kembali dari list menjadi excel dengan mengambil 10 data terbaik
-dataID = [x for _, x in sorted(zip(defuzzy, dataID),reverse= True)]
-dataServis = [x for _, x in sorted(zip(defuzzy, dataServis),reverse= True)]
-dataHarga = [x for _, x in sorted(zip(defuzzy, dataHarga),reverse= True)]
-defuzzy.sort(reverse= True)
-df = f.pd.DataFrame({'id': dataID[0:10], 'servis': dataServis[0:10], 'harga': dataHarga[0:10], 'fuzzy score': defuzzy[0:10]})
-df.to_excel('tes.xlsx', sheet_name='tes', index=False)
+dataIDdmp = [x for _, x in sorted(zip(defuzzy, dataID),reverse= True)]
+dataServisdmp = []
+dataHargadmp = []
+dataDefuzzy = []
+
+for i in range(10):
+    dmpID = dataIDdmp[i]
+    j = 0
+    while dmpID != dataID[j]:
+        j+= 1
+    dataServisdmp.append(dataServis[j])
+    dataHargadmp.append(dataHarga[j])
+    dataDefuzzy.append(defuzzy[j])
+
+df = f.pd.DataFrame({'id': dataIDdmp[0:10], 'servis': dataServisdmp[0:10], 'harga': dataHargadmp[0:10], 'fuzzy score': dataDefuzzy[0:10]})
+df.to_excel('peringkat.xlsx', sheet_name='tes', index=False)
 
 
 
