@@ -1,8 +1,8 @@
 import fungsi as f
 
+#Inisialisasi variable
 dataServis = f.listFloat
 dataHarga = f.listFloat
-
 fuzifikasiSrvc = f.Fuzifikasi
 inferenceds=f.Fuzifikasi
 fuzifikasiPrc = f.Fuzifikasi
