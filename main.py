@@ -25,6 +25,8 @@ for i in range(len(dataServis)):
 for i in range(len(dataHarga)):
     fuzifikasiPrc.append(f.FuzifikasiHarga(dataHarga[i]))
 
+print(fuzifikasiSrvc,"\n\n", fuzifikasiPrc)
+
 #Inference 
 inferenceds = f.inference(fuzifikasiSrvc,fuzifikasiPrc)
 
