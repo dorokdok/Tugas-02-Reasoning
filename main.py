@@ -25,8 +25,6 @@ for i in range(len(dataServis)):
 for i in range(len(dataHarga)):
     fuzifikasiPrc.append(f.FuzifikasiHarga(dataHarga[i]))
 
-print(fuzifikasiSrvc,"\n\n", fuzifikasiPrc)
-
 #Inference 
 inferenceds = f.inference(fuzifikasiSrvc,fuzifikasiPrc)
 
@@ -41,7 +39,7 @@ dataServisdmp = []
 dataHargadmp = []
 dataDefuzzy = []
 
-for i in range(10):
+for i in range(len(dataIDdmp)):
     dmpID = dataIDdmp[i]
     j = 0
     while dmpID != dataID[j]:

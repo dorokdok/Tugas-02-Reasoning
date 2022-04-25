@@ -177,7 +177,7 @@ def inference(servis: Fuzifikasi, harga: Fuzifikasi) -> Fuzifikasi:
     return out
 
 #Defuzzifikasi menggunakan sugeno
-#pasti * 100 + mungkin * 50 + murah *30 /pasti+mungkin+tidak
+#pasti * 100 + mungkin * 50 + tidak *30 /pasti+mungkin+tidak
 def defuzzy(inputan: listFloat) -> float:
     pembagi = inputan[0]+inputan[1]+inputan[2]
     if pembagi == 0:
